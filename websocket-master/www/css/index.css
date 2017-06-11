@@ -1,0 +1,117 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+html{
+    font-size: 62.5%;
+}
+html,body{
+    width: 100%;
+    height: 100%;
+    background: #eee;
+}
+#cover{
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    position: absolute;
+}
+#box{
+    width: 25rem;
+    background: #fff;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%,-50%);
+    -moz-transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+    -o-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+    font-size: 1.5rem;
+}
+#nickname{
+    outline: none;
+    border-radius: 0.3rem;
+    border: 0.1rem solid #999;
+    text-indent: 0.5rem;
+    font-size: 1.5rem;
+    height: 2.8rem;
+    width: 18rem;
+    float: left;
+}
+#submit{
+    font-size: 1.5rem;
+    height: 3rem;
+    width: 5rem;
+    text-align: center;
+    background: #208bf8;
+    float: left;
+    border-radius: 0.3rem;
+    line-height: 3rem;
+    color: #fff;
+    margin-left: 1rem;
+}
+#container{
+    height: 100%;
+    display: -webkit-box;
+    display: -moz-box;
+    display: box;
+    -webkit-box-orient: vertical;
+    -moz-box-orient: vertical;
+    -ms-box-orient: vertical;
+    box-orient: vertical;
+}
+#messagebox{
+    -webkit-box-flex: 1;
+    -moz-box-flex: 1;
+    box-flex: 1;
+    border: 0.1rem solid #666;
+    margin: 1rem 1rem 0 1rem;
+    padding: 1rem;
+    border-radius: 0.3rem;
+    overflow: auto;
+    font-size: 1.5rem;
+    line-height: 1.8rem;
+}
+#title{
+    text-align: center;
+    font-size: 3rem;
+    padding: 1rem 0 1rem 0;
+    font-weight: bold;
+}
+#num{
+    font-size: 2rem;
+    margin-left: 1rem;
+}
+#input{
+    margin: 0 1rem 0 1rem;
+    padding: 1rem 0 1rem 0;
+    display: -webkit-box;
+    display: -moz-box;
+    display: box;
+}
+#message{
+    -webkit-box-flex: 1;
+    -moz-box-flex: 1;
+    box-flex: 1;
+    outline: none;
+    display: block;
+    height: 2.8rem;
+    border: 0.1rem solid #999;
+    border-radius: 0.3rem;
+    text-indent: 1rem;
+    font-size: 1.5rem;
+}
+#send{
+    height: 3rem;
+    background: #208bf8;
+    margin-left: 1rem;
+    font-size: 1.5rem;
+    color: #fff;
+    line-height: 3rem;
+    padding: 0 1rem 0 1rem;
+    cursor: pointer;
+    border-radius: 0.3rem;
+}

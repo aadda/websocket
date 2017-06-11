@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>websocket在线聊天室</title>
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+<div id="cover">
+    <div id="box">
+        <input type="text" name="nickname" id="nickname" placeholder="请输入一个昵称">
+        <div id="submit">确定</div>
+    </div>
+</div>
+<div id="container">
+    <div id="title">在线聊天室</div>
+    <div id="num">当前在线用户:  <span id="users"></span></div>
+    <div id="messagebox"></div>
+    <div id="input">
+        <input type="text" id="message" placeholder="请输入聊天信息">
+        <div id="send">发送</div>
+    </div>
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    (function(){
+        var socket = io.connect();
+        var oSubmit = document.getElementById("submit");
+        var oNickname = document.getElementById("nickname");
+        var nowUser = "";
+        oSubmit.onclick = function(){
+            var re = /\s/;
+            if(re.exec(oNickname.value)){
+                alert("昵称中请不要出现空格");
+            }else{
+                nowUser = oNickname.value;
+                socket.emit("login", oNickname.value);
+            }
+        };
+        socket.on("existed", function(){
+            alert("用户名已存在");
+        });
+        var oCover = document.getElementById("cover");
+        socket.on("loginSuccess", function(){
+            oCover.style.display = "none";
+        });
+        var oBox = document.getElementById("messagebox");
+        var oUsers = document.getElementById("users");
+        socket.on("system", function(users){
+            var str = "";
+            for(var i=0; i<users.length; i++){
+                str += users[i] + "、";
+            }
+            str = str.substring(0, str.length-1);
+            oUsers.innerHTML = str;
+        });
+        socket.on("showMes", function(data, user){
+            var date = new Date().toTimeString().substring(0, 8);
+            // 看自己的消息为红色,看别人消息为黑色
+            if(user == nowUser){
+                oBox.innerHTML += "<div style='color: #f00;'>" + user + "(" + date + "): " + data + "</div>";
+            }else{
+                oBox.innerHTML += "<div>" + user + "(" + date + "): " + data + "</div>";
+            }
+        });
+        var oMessage = document.getElementById("message");
+        var oSend = document.getElementById("send");
+        oSend.onclick = function(){
+            if(oMessage.value.trim().length != 0){
+                socket.emit("send", oMessage.value);
+                oMessage.value = "";
+            }
+        };
+        // 给输入框绑个回车
+        oNickname.onkeydown = function(e){
+            if(e.keyCode == 13){
+                oSubmit.onclick();
+            }
+        };
+        oMessage.onkeydown = function(e){
+            if(e.keyCode == 13){
+                oSend.onclick();
+            }
+        };
+    })();
+</script>
+</body>
+</html>
